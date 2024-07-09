@@ -23,6 +23,7 @@ public class Adresses implements Serializable {
     Scanner inputString = new Scanner(System.in);
 
     public Adresses(UUID id){
+        this.id = id;
         attributeInitialization(id);
     }
 
