@@ -103,7 +103,7 @@ public class Adresses implements Serializable {
     }
 
     public void attributeInitialization (UUID id){
-        System.out.println("\nNovo endereço\n");
+        System.out.println("\nEndereço\n");
 
         System.out.println("Informe o CEP: ");
         cep = input.next();
@@ -140,7 +140,9 @@ public class Adresses implements Serializable {
             System.out.println("\nAlteração de endereço\n");
             System.out.println("Informe qual campo do endereço será alterado:\n");
             System.out.println("1 - CEP\n2 - Estado\n3 - Cidade\n4 - Bairro\n5 - Rua\n6 - Número\n7 - Alterar endereço completo\n");
+
             opc = input.nextInt();
+
             switch (opc){
                 case 1:
                     System.out.println("Informe o novo CEP: ");

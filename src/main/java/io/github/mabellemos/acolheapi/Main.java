@@ -1,7 +1,9 @@
 package io.github.mabellemos.acolheapi;
 
 import io.github.mabellemos.acolheapi.core.domain.Adresses;
+import io.github.mabellemos.acolheapi.core.domain.Clothes;
 import io.github.mabellemos.acolheapi.core.domain.Responsible;
+import io.github.mabellemos.acolheapi.core.domain.Shelters;
 
 import java.util.UUID;
 
@@ -11,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
        UUID id = UUID.randomUUID();
 
-       Responsible end = new Responsible(id, "Maria Júlia Silva", "82934568");
+       Clothes end = new Clothes(id);
        System.out.println(end.toString());
        end.alter(id);
        System.out.println(end.toString());

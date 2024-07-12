@@ -1,10 +1,16 @@
 package io.github.mabellemos.acolheapi.core.domain;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.UUID;
 
-public class Responsible {
+public class Responsible implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private UUID id;
     private String name;
     private String telephone;
@@ -57,12 +63,13 @@ public class Responsible {
     }
 
     public void attributeInitialization (UUID id){
-        System.out.println("\nNovo responsável\n");
+        System.out.println("\nResponsável\n");
 
-        System.out.println("Informe o name: ");
+        System.out.println("Informe o nome completo: ");
         name = inputString.nextLine();
         System.out.println("Informe o telefone: ");
         telephone = input.next();
+
     }
 
     @Override
@@ -82,7 +89,9 @@ public class Responsible {
             System.out.println("\nAlteração de responsável\n");
             System.out.println("Informe qual campo do responsável será alterado:\n");
             System.out.println("1 - Nome\n2 - Telefone\n3 - Alterar todos os dados de responsável\n");
+
             opc = input.nextInt();
+
             switch (opc){
                 case 1:
                     System.out.println("Informe o novo nome: ");
@@ -104,8 +113,8 @@ public class Responsible {
             }
             System.out.println("\nDeseja alterar dados novamente? (Sim/Não)");
             esc = input.next();
+
         } while(esc.equalsIgnoreCase("sim"));
     }
-
 }
 
