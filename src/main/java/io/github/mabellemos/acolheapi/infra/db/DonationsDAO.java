@@ -21,14 +21,14 @@ public class DonationsDAO implements DonationsRepository {
 
     public void registration(int centerId) throws SQLException {
 
-        /*DistribuitionCenters center = new DistribuitionCenters();
+        DistribuitionCenters center = new DistribuitionCenters();
         DistribuitionCentersService distribuitionCentersService = new DistribuitionCentersService();
 
         int itemCount = distribuitionCentersService.countItems(center.getId());
 
         if (itemCount >= 1000) {
             throw new SQLException("Capacidade do centro de distribuição atingida.");
-        }*/
+        }
 
         System.out.println("\nCadastro de doações\n\nO que deseja cadastrar no sistema?\n\n1 - Roupas\n2 - Produtos de Higiene\n3 - Alimentos\n");
         int opc = input.nextInt();
@@ -87,8 +87,9 @@ public class DonationsDAO implements DonationsRepository {
         int donationId = input.nextInt();
 
         try (Connection conn = DatabaseConnection.getConnection()) {
-            // Verificar se o centro de distribuição existe
+
             String checkDCQuery = "SELECT COUNT(*) FROM DistributionCenters WHERE id = ?";
+
             try (PreparedStatement checkDCStmt = conn.prepareStatement(checkDCQuery)) {
                 checkDCStmt.setInt(1, codeDC);
                 ResultSet rs = checkDCStmt.executeQuery();
@@ -98,7 +99,6 @@ public class DonationsDAO implements DonationsRepository {
                 }
             }
 
-            // Verificar se a doação pertence ao centro de distribuição informado
             String checkDonationQuery = "SELECT COUNT(*) FROM Donations WHERE id = ? AND distribution_center_id = ?";
             try (PreparedStatement checkDonationStmt = conn.prepareStatement(checkDonationQuery)) {
                 checkDonationStmt.setInt(1, donationId);
@@ -110,8 +110,8 @@ public class DonationsDAO implements DonationsRepository {
                 }
             }
 
-            // Atualizar os dados da doação
             String updateQuery = "UPDATE Donations SET amount = ?, date = ?, type = ? WHERE id = ? AND distribution_center_id = ?";
+
             try (PreparedStatement updateStmt = conn.prepareStatement(updateQuery)) {
                 updateStmt.setDouble(1, donation.getAmount());
                 updateStmt.setDate(2, Date.valueOf(String.valueOf(donation.getDate())));

@@ -45,7 +45,7 @@ public class DonationService {
             String query = "INSERT INTO HygieneProducts (id, amount, date) VALUES (?, ?, ?, ?)";
             try (PreparedStatement stmt = conn.prepareStatement(query)) {
                 stmt.setInt(2, hygieneProducts.getAmount());
-                //stmt.setDate(3, Date.valueOf(hygieneProducts.getDate()));
+                stmt.setDate(3, Date.valueOf(String.valueOf(hygieneProducts.getDate())));
 
                 stmt.executeUpdate();
             }
@@ -61,10 +61,10 @@ public class DonationService {
             String query = "INSERT INTO Foods (id, amount, date, description, type, validity, measure) VALUES (?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement stmt = conn.prepareStatement(query)) {
                 stmt.setInt(2, foods.getAmount());
-                //stmt.setDate(3, Date.valueOf(foods.getDate()));
+                stmt.setDate(3, Date.valueOf(String.valueOf(foods.getDate())));
                 stmt.setString(5, foods.getDescription());
                 stmt.setString(6, foods.getType());
-                //stmt.setDate(7, Date.valueOf(foods.getValidity()));
+                stmt.setDate(7, Date.valueOf(String.valueOf(foods.getValidity())));
                 stmt.setString(8, foods.getMeasure());
 
                 stmt.executeUpdate();
@@ -121,13 +121,10 @@ public class DonationService {
 
         if (type.equals("clothes")) {
             donation = new Clothes();
-            // Set atributos específicos para Clothes
         } else if (type.equals("hygieneProducts")) {
             donation = new HygieneProducts();
-            // Set atributos específicos para HygieneProducts
         } else if (type.equals("foods")) {
             donation = new Foods();
-            // Set atributos específicos para Foods
         } else {
             donation = new Donations();
         }

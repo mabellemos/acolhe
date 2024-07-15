@@ -14,9 +14,11 @@ public class DistribuitionCentersService {
 
     private Scanner input = new Scanner(System.in);
 
-        /*public int countItems(int centerId) throws SQLException {
+        public int countItems(int centerId) throws SQLException {
             try (Connection conn = DatabaseConnection.getConnection()) {
+
                 String query = "SELECT COUNT(*) FROM Donations WHERE distribuitionCenterId = ?";
+
                 try (PreparedStatement stmt = conn.prepareStatement(query)) {
                     stmt.setInt(1, centerId);
                     try (ResultSet rs = stmt.executeQuery()) {
@@ -27,5 +29,5 @@ public class DistribuitionCentersService {
                 }
             }
             return 0;
-        }*/
+        }
 }

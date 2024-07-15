@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DBNavigator.Project.DDLFileAttachmentManager">
+    <mappings />
+    <preferences />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="4c1ef503-ec4c-4a73-b2a5-b311e7f37295">
@@ -14,9 +17,6 @@
   </component>
   <component name="DBNavigator.Project.ParserDiagnosticsManager">
     <diagnostics-history />
-  <component name="DBNavigator.Project.ObjectQuickFilterManager">
-    <last-used-operator value="EQUAL" />
-    <filters />
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
