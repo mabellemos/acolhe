@@ -1,37 +1,34 @@
-package io.github.mabellemos.acolheapi.core.domain;
+package io.github.mabellemos.acolheapi.core.domain.models;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 import java.util.Scanner;
-import java.util.UUID;
 
 public class Donations implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private UUID id;
+    private int id;
     private int amount;
-    private Date date;
+    private Date dateDonation;
+    private String typeDonation;
 
     Scanner input = new Scanner(System.in);
 
-    public Donations(UUID id){
-        this.id = id;
-        attributeInitialization(id);
-
+    public Donations(){
     }
-    public Donations(UUID id, int amount, Date date) {
+
+    public Donations(int id, int amount, Date date) {
         this.id = id;
         this.amount = amount;
-        this.date = date;
+        this.dateDonation = dateDonation;
+        this.typeDonation = typeDonation;
     }
 
-    public UUID getId() {
+    public int getId() {
         return id;
     }
 
@@ -44,11 +41,19 @@ public class Donations implements Serializable {
     }
 
     public Date getDate() {
-        return date;
+        return dateDonation;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate(Date dateDonation) {
+        this.dateDonation = dateDonation;
+    }
+
+    public String getType() {
+        return typeDonation;
+    }
+
+    public void setType(String typeDonation) {
+        this.typeDonation = typeDonation;
     }
 
     @Override
@@ -56,12 +61,12 @@ public class Donations implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Donations donations = (Donations) o;
-        return amount == donations.amount && Objects.equals(id, donations.id) && Objects.equals(date, donations.date) && Objects.equals(input, donations.input);
+        return id == donations.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, amount, date, input);
+        return Objects.hashCode(id);
     }
 
     @Override
@@ -69,27 +74,12 @@ public class Donations implements Serializable {
         return "Donations{" +
                 "id=" + id +
                 ", amount=" + amount +
-                ", date=" + date +
-                ", input=" + input +
+                ", date=" + dateDonation +
+                ", type=" + typeDonation +
                 '}';
     }
 
-    public void attributeInitialization (UUID id){
-        System.out.println("\nDoações\n");
-
-        System.out.println("Informe a quantidade de doações: ");
-        amount = input.nextInt();
-        System.out.println("Informe a data: ");
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            date = sdf.parse(input.next());
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void alter(UUID id){
+    public void alter(int id){
         String esc;
         int opc;
 
@@ -108,20 +98,8 @@ public class Donations implements Serializable {
                     setAmount(newAmount);
                     break;
                 case 2:
-                    System.out.println("Informe a nova data: ");
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                    Date newDate = null;
-
-                    try {
-                        newDate = sdf.parse(input.next());
-                    } catch (ParseException e) {
-                        throw new RuntimeException(e);
-                    }
-
-                    setDate(newDate);
                     break;
                 case 3:
-                    attributeInitialization(id);
                     break;
                 default:
                     System.out.println("\nOpção inválida!");

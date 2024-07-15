@@ -1,9 +1,8 @@
-package io.github.mabellemos.acolheapi.core.domain;
+package io.github.mabellemos.acolheapi.core.domain.models;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.UUID;
 import java.util.Scanner;
 
 public class Adresses implements Serializable {
@@ -11,7 +10,7 @@ public class Adresses implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private UUID id;
+    private int id;
     private String cep;
     private String state;
     private String city;
@@ -22,12 +21,10 @@ public class Adresses implements Serializable {
     Scanner input = new Scanner(System.in);
     Scanner inputString = new Scanner(System.in);
 
-    public Adresses(UUID id){
-        this.id = id;
-        attributeInitialization(id);
+    public Adresses(){
     }
 
-    public Adresses(UUID id, String cep, String state, String city, String district, String street, String number){
+    public Adresses(int id, String cep, String state, String city, String district, String street, String number){
         this.id = id;
         this.cep = cep;
         this.state = state;
@@ -37,7 +34,7 @@ public class Adresses implements Serializable {
         this.number = number;
     }
 
-    public UUID getId(){
+    public int getId(){
         return id;
     }
 
@@ -102,7 +99,7 @@ public class Adresses implements Serializable {
         return Objects.hashCode(id);
     }
 
-    public void attributeInitialization (UUID id){
+    public void attributeInitialization (int id){
         System.out.println("\nEndereço\n");
 
         System.out.println("Informe o CEP: ");
@@ -132,7 +129,7 @@ public class Adresses implements Serializable {
                 '}';
     }
 
-    public void alter(UUID id){
+    public void alter(int id){
         String esc;
         int opc;
 

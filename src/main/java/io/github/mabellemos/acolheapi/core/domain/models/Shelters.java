@@ -1,17 +1,16 @@
-package io.github.mabellemos.acolheapi.core.domain;
+package io.github.mabellemos.acolheapi.core.domain.models;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Scanner;
-import java.util.UUID;
 
 public class Shelters implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private UUID id;
+    private int id;
     private String name;
     private Adresses adress;
     private Responsible responsible;
@@ -24,12 +23,10 @@ public class Shelters implements Serializable {
     Scanner input = new Scanner(System.in);
     Scanner inputString = new Scanner(System.in);
 
-    public Shelters (UUID id){
-        this.id = id;
-        attributeInitialization(id);
+    public Shelters (int id){
     }
 
-    public Shelters(UUID id, String name, Adresses adress, Responsible responsible, String telephone, String email, Double occupation, Double capacity, int limitItems) {
+    public Shelters(int id, String name, Adresses adress, Responsible responsible, String telephone, String email, Double occupation, Double capacity, int limitItems) {
         this.id = id;
         this.name = name;
         this.adress = adress;
@@ -41,7 +38,7 @@ public class Shelters implements Serializable {
         this.limitItems = limitItems;
     }
 
-    public UUID getId() {
+    public int getId() {
         return id;
     }
 
@@ -102,12 +99,12 @@ public class Shelters implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Shelters shelters = (Shelters) o;
-        return limitItems == shelters.limitItems && Objects.equals(id, shelters.id) && Objects.equals(name, shelters.name) && Objects.equals(adress, shelters.adress) && Objects.equals(responsible, shelters.responsible) && Objects.equals(telephone, shelters.telephone) && Objects.equals(email, shelters.email) && Objects.equals(occupation, shelters.occupation) && Objects.equals(capacity, shelters.capacity);
+        return id == shelters.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, adress, responsible, telephone, email, occupation, capacity, limitItems);
+        return Objects.hashCode(id);
     }
 
     @Override
@@ -125,13 +122,13 @@ public class Shelters implements Serializable {
                 '}';
     }
 
-    public void attributeInitialization (UUID id){
+    public void attributeInitialization (int id){
         System.out.println("\nAbrigo\n");
 
         System.out.println("Informe o nome do abrigo: ");
         name = inputString.nextLine();
-        adress = new Adresses(id);
-        responsible = new Responsible(id);
+        adress = new Adresses();
+        responsible = new Responsible();
         System.out.println("Informe o telefone do abrigo: ");
         telephone = input.next();
         System.out.println("Informe o e-mail para contato: ");
@@ -140,7 +137,7 @@ public class Shelters implements Serializable {
         occupation = input.nextDouble();
     }
 
-    public void alter(UUID id){
+    public void alter(int id){
         String esc;
         int opc;
 
@@ -160,13 +157,13 @@ public class Shelters implements Serializable {
                     break;
                 case 2:
                     System.out.println("Informe o novo endereço do abrigo: ");
-                    Adresses newAdress = new Adresses(id);
+                    Adresses newAdress = new Adresses();
 
                     setAdress(newAdress);
                     break;
                 case 3:
                     System.out.println("Informe o novo responsável pelo abrigo: ");
-                    Responsible newResponsible = new Responsible(id);
+                    Responsible newResponsible = new Responsible();
 
                     setResponsible(newResponsible);
                     break;
@@ -193,6 +190,5 @@ public class Shelters implements Serializable {
 
         } while(esc.equalsIgnoreCase("sim"));
     }
-
 
 }

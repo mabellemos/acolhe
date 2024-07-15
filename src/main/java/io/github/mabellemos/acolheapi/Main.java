@@ -1,21 +1,80 @@
 package io.github.mabellemos.acolheapi;
 
-import io.github.mabellemos.acolheapi.core.domain.Adresses;
-import io.github.mabellemos.acolheapi.core.domain.Clothes;
-import io.github.mabellemos.acolheapi.core.domain.Responsible;
-import io.github.mabellemos.acolheapi.core.domain.Shelters;
+import io.github.mabellemos.acolheapi.app.Adm;
+import io.github.mabellemos.acolheapi.core.domain.models.DistribuitionCenters;
+import io.github.mabellemos.acolheapi.infra.db.DonationsDAO;
 
-import java.util.UUID;
+import java.sql.SQLException;
+import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
-       UUID id = UUID.randomUUID();
+    public static void main(String[] args) throws SQLException {
+        String resp;
+        int opc;
 
-       Clothes end = new Clothes(id);
-       System.out.println(end.toString());
-       end.alter(id);
-       System.out.println(end.toString());
+        Scanner input = new Scanner(System.in);
+        Adm adm = new Adm();
+
+        do {
+
+            System.out.println("\nACOLHE\n");
+            System.out.println("1 - Doações");
+            opc = input.nextInt();
+
+            switch (opc){
+                case 1:
+                    System.out.println("\n---- Doações ----");
+                    DonationsDAO donationDAO = new DonationsDAO();
+
+                    String respD;
+                    int opcD;
+
+                    do {
+                        System.out.println("1 - Cadastrar\n2 - Visualizar dados\n3 - Alterar dados\n4 - Deletar\n");
+                        opcD = input.nextInt();
+
+                        switch (opc) {
+                            case 1:
+                                System.out.println("Informe o id do centro de distribuição: ");
+                                int centerIdReg = input.nextInt();
+
+                                donationDAO.registration(centerIdReg);
+                                break;
+                            case 2:
+                                donationDAO.display();
+                                break;
+                            case 3:
+                                donationDAO.alter();
+                                break;
+                            case 4:
+                                System.out.println("Informe o id do centro de distribuição: ");
+                                int centerIdDelete = input.nextInt();
+
+                                donationDAO.registration(centerIdDelete);
+
+                                System.out.println("Informe o id da doação: ");
+                                int donationIdDelete = input.nextInt();
+
+                                donationDAO.delete(centerIdDelete, donationIdDelete);
+                                break;
+                            default:
+                                System.out.println("\nOpção inválida!");
+                        }
+
+                        System.out.println("Deseja realizar outra operação? (Sim/Não)");
+                        respD = input.next();
+
+                    } while (respD.equalsIgnoreCase("sim"));
+
+                    break;
+                default:
+                    System.out.println("\nOpção inválida!");
+                    break;
+            }
+
+            System.out.println("Deseja realizar outra operação? (SIm/Não)");
+            resp = input.next();
+
+        } while (resp.equalsIgnoreCase("sim"));
     }
 }

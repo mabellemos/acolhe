@@ -1,11 +1,8 @@
-package io.github.mabellemos.acolheapi.core.domain;
+package io.github.mabellemos.acolheapi.core.domain.models;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Objects;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -14,26 +11,21 @@ public class Clothes extends Donations implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private int code;
     private String size;
+    private String gender;
     private String type;
+    private String description;
 
     Scanner input = new Scanner(System.in);
 
-    public Clothes(UUID id) {
-        super(id);
-        attributeInitialization(id);
-    }
+    public Clothes() {}
 
-    public Clothes(UUID id, int amount, Date date, int code, String size, String type) {
+    public Clothes(int id, int amount, Date date, String size, String gender, String type, String description) {
         super(id, amount, date);
-        this.code = code;
         this.size = size;
+        this.gender = gender;
         this.type = type;
-    }
-
-    public int getCode() {
-        return code;
+        this.description = description;
     }
 
     public String getSize() {
@@ -44,6 +36,14 @@ public class Clothes extends Donations implements Serializable {
         this.size = size;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     public String getType() {
         return type;
     }
@@ -52,26 +52,21 @@ public class Clothes extends Donations implements Serializable {
         this.type = type;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Clothes clothes = (Clothes) o;
-        return code == clothes.code && Objects.equals(size, clothes.size);
+    public String getDescription() {
+        return description;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), code, size, type);
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
     public String toString() {
         return "Clothes{" +
-                "code=" + code +
+                "description='" + description + '\'' +
+                ", type='" + type + '\'' +
+                ", gender='" + gender + '\'' +
                 ", size='" + size + '\'' +
-                ", type=" + type + '\'' +
                 '}';
     }
 
@@ -83,6 +78,12 @@ public class Clothes extends Donations implements Serializable {
 
         System.out.println("Informe o tamanho (PP/P/M/G/GG): ");
         size = input.next();
+
+        System.out.println("Informe o gênero (M/F): ");
+        gender = input.next();
+
+        System.out.println("Informe uma descrição da roupa: ");
+        description = input.next();
     }
 
 }
