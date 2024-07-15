@@ -1,4 +1,4 @@
-package io.github.mabellemos.acolheapi.core.domain;
+package io.github.mabellemos.acolheapi.core.domain.models;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -11,25 +11,23 @@ public class Responsible implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private UUID id;
+    private int id;
     private String name;
     private String telephone;
 
     Scanner input = new Scanner(System.in);
     Scanner inputString = new Scanner(System.in);
 
-    public Responsible(UUID id){
-        this.id = id;
-        attributeInitialization(id);
+    public Responsible(){
     }
 
-    public Responsible(UUID id, String name, String telephone) {
+    public Responsible(int id, String name, String telephone) {
         this.id = id;
         this.name = name;
         this.telephone = telephone;
     }
 
-    public UUID getId() {
+    public int getId() {
         return id;
     }
 
@@ -54,22 +52,12 @@ public class Responsible implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Responsible that = (Responsible) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(telephone, that.telephone);
+        return id == that.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, telephone);
-    }
-
-    public void attributeInitialization (UUID id){
-        System.out.println("\nResponsável\n");
-
-        System.out.println("Informe o nome completo: ");
-        name = inputString.nextLine();
-        System.out.println("Informe o telefone: ");
-        telephone = input.next();
-
+        return Objects.hashCode(id);
     }
 
     @Override
@@ -106,7 +94,6 @@ public class Responsible implements Serializable {
                     setTelephone(newTelephone);
                     break;
                 case 3:
-                    attributeInitialization(id);
                     break;
                 default:
                     System.out.println("\nOpção inválida!");

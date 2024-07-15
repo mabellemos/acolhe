@@ -1,11 +1,10 @@
-package io.github.mabellemos.acolheapi.core.domain;
+package io.github.mabellemos.acolheapi.core.domain.models;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Objects;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -14,7 +13,7 @@ public class Foods extends Donations implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private int code;
+    private String description;
     private String type;
     private Date validity;
     private String measure;
@@ -22,21 +21,20 @@ public class Foods extends Donations implements Serializable {
     Scanner input = new Scanner(System.in);
     Scanner inputString = new Scanner(System.in);
 
-    public Foods(UUID id) {
-        super(id);
-        attributeInitialization(id);
+    public Foods() {
     }
 
-    public Foods(UUID id, int amount, Date date, int code, String type, Date validity, String measure) {
+    public Foods(int id, int amount, Date date, String type, Date validity, String measure) {
         super(id, amount, date);
-        this.code = code;
         this.type = type;
         this.validity = validity;
         this.measure = measure;
     }
 
-    public int getCode() {
-        return code;
+    public String getDescription() { return description; }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getType() {
@@ -64,26 +62,12 @@ public class Foods extends Donations implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Foods foods = (Foods) o;
-        return code == foods.code && Objects.equals(type, foods.type) && Objects.equals(validity, foods.validity) && Objects.equals(measure, foods.measure);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), code, type, validity, measure);
-    }
-
-    @Override
     public String toString() {
         return "Foods{" +
-                "code=" + code +
-                ", type='" + type + '\'' +
+                "measure='" + measure + '\'' +
                 ", validity=" + validity +
-                ", measure='" + measure + '\'' +
+                ", type='" + type + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 
@@ -104,5 +88,8 @@ public class Foods extends Donations implements Serializable {
 
         System.out.println("Informe a unidade de medida (mm/mg/g/kg): ");
         measure = input.next();
+
+        System.out.println("Informe uma descrição: ");
+        description = inputString.nextLine();
     }
 }
